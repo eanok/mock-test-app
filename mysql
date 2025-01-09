@@ -1,0 +1,1 @@
+INSERT INTO `admin_login` (`id`, `username`, `password`) VALUES (NULL, 'admin', 'password');

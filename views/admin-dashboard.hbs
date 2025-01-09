@@ -1,0 +1,232 @@
+<div class="admin dashboard">
+  <div class="nav-bar">
+    <div class="header"></div>
+    <div class="menu-container">
+      <h3>Dashboard</h3>
+      {{!-- {{#if message}}
+        <h2>{{message}}</h2>
+      {{/if}} --}}
+
+      <!-- First menu-->
+      <div class="menu">
+        <!-- Tite  -->
+        <div class="title">
+          <img
+            class="icon"
+            src="/images/manage-courses.png"
+            alt="Manage Courses"
+          />
+          <h4>Manage Test</h4>
+          <img class="arrow" src="/images/arrow-down.png" alt="Manage Test" />
+        </div>
+
+        <!-- List of menu-items -->
+        <div class="menu-items">
+          <a class="menu-item" onclick="addTestForm()">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>Add Test</h4>
+          </a>
+          <a class="menu-item" onclick="manageTests()">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>Manage Test</h4>
+          </a>
+        </div>
+      </div>
+
+      <!-- Second menu -->
+      <div class="menu">
+        <!-- Tite  -->
+        <div class="title">
+          <img class="icon" src="/images/manage-exams.png" alt="Manage EXam" />
+          <h4>Manage Exam</h4>
+          <img
+            class="arrow"
+            src="/images/arrow-down.png"
+            alt="Manage Courses"
+          />
+        </div>
+
+        <!-- List of menu-items -->
+        <div class="menu-items">
+          <a class="menu-item" href="">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>Exam</h4>
+          </a>
+          <!-- <a class="menu-item" href="">
+                <img src="./right-arrow.png" alt="Manage Courses" />
+                <h4>Manage Course</h4>
+              </a> -->
+        </div>
+      </div>
+
+      <!-- Third menu -->
+      <div class="menu">
+        <!-- Tite  -->
+        <div class="title">
+          <img
+            class="icon"
+            src="/images/manage-examinee.png"
+            alt="Manage Courses"
+          />
+          <h4>Manage Examinee</h4>
+          <img
+            class="arrow"
+            src="/images/arrow-down.png"
+            alt="Manage Courses"
+          />
+        </div>
+
+        <!-- List of menu-items -->
+        <div class="menu-items">
+          <a class="menu-item" href="">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>Add Eaxminee</h4>
+          </a>
+          <a class="menu-item" href="">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>Manage Examinee</h4>
+          </a>
+        </div>
+      </div>
+
+      <!-- Fourth menu -->
+      <div class="menu">
+        <!-- Tite  -->
+        <div class="title">
+          <img class="icon" src="/images/feedback.png" alt="Manage EXam" />
+          <h4>Feedback</h4>
+          <img
+            class="arrow"
+            src="/images/arrow-down.png"
+            alt="Manage Courses"
+          />
+        </div>
+
+        <!-- List of menu-items -->
+        <div class="menu-items">
+          <a class="menu-item" href="">
+            <img src="/images/right-arrow.png" alt="Manage Courses" />
+            <h4>All Feedbacks</h4>
+          </a>
+          <!-- <a class="menu-item" href="">
+                <img src="./right-arrow.png" alt="Manage Courses" />
+                <h4>Manage Course</h4>
+              </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="console">
+    <div class="header">
+      <a href="/admin-dashboard/analytics"><button
+          class="analytics"
+        >Analytics</button></a>
+    </div>
+    <div class="admin-control">
+
+      <div class="addTest" style="display: none;">
+        <div class="message-container" style="display: none;"></div>
+
+        <h1>Add Test</h1>
+        <form action="/add-test" method="POST" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="testTitle">Enter test title:</label>
+            <input type="text" id="testTitle" name="testTitle" required />
+          </div>
+
+          <div class="form-group">
+            <label for="testCategory">Select the category:</label>
+            <select name="testCategory" id="testCategory" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timeLimit">Enter time limit in minutes:</label>
+            <input
+              type="number"
+              id="timeLimit"
+              name="timeLimit"
+              min="1"
+              max="500"
+              step="1"
+              value="1"
+              placeholder="Enter minutes"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="totalQuestions">Enter total no. of questions:</label>
+            <input
+              type="number"
+              id="totalQuestions"
+              name="totalQuestions"
+              min="1"
+              max="500"
+              step="1"
+              value="1"
+              placeholder="Enter No. questions"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="testDescription">Enter description:</label>
+            <textarea
+              id="testDescription"
+              name="testDescription"
+              rows="3"
+              cols="40"
+              required
+            ></textarea>
+
+          </div>
+
+          <div class="form-group">
+            <label for="testQuestions">Upload the question in CSV file:</label>
+            <input type="file" accept=".csv" name="testQuestions" required />
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      {{! Manage tests }}
+
+      <div class="manage-tests" style="display: none;">
+
+        {{#each test_details}}
+          <div class="test">
+            <h2>{{title}}</h2>
+            <div class="test_group">
+              <P>Category:</P>
+              <div class="test-category">
+                <p>{{category}}</p>
+              </div>
+            </div>
+
+            <div class="test_group">
+              <p>{{time_limit}} Minutes</p>
+              <div style="font-weight: 700;">|</div>
+              <p>{{no_questions}} questions</p>
+            </div>
+
+            <div class="control-group">
+              <button class="update">Update</button>
+
+              <button
+                class="delete"
+                onclick="deleteTest({{id}})"
+              >Delete</button>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
