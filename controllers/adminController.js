@@ -169,10 +169,10 @@ const adminDashboardPage = async (req, res) => {
     });
 };
 
+// . delete test.
 const deleteTest = async (req, res) => {
   const testId = req.params.id;
-  // res.send("success");
-  // console.log(testId);
+
   const sqlQuery = "DELETE FROM tests WHERE id = ?";
   await connection
     .query(sqlQuery, [testId])
